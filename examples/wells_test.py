@@ -5,14 +5,18 @@ from unittest import TestCase
 class WellField_Test(TestCase):
     def test(self):
         WF = WellField()
+
         WF.add_well( Well( 11, -7 ) )
-        WF.add_well( Well( -99, 88 ) )
+        WF.add_well( Well( -99, 88, 1 ) )
         WF.add_well( Well( 1, 1 ) )
+        WF.add_well( Well( 100, 100, -2 ) )
 
         self.assertEqual( WF.topleft_X, -99)
         self.assertEqual( WF.topleft_Y, -7)
-        self.assertEqual( WF.bottomright_X, 11)
-        self.assertEqual( WF.bottomright_Y, 88)
+        self.assertEqual( WF.topleft_Z, -2)
+        self.assertEqual( WF.bottomright_X, 100)
+        self.assertEqual( WF.bottomright_Y, 100)
+        self.assertEqual( WF.bottomright_Z, 1)
 
 #print( WF.topleft_X, WF.topleft_Y, WF.bottomright_X, WF.bottomright_Y )
 
