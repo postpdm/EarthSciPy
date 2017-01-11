@@ -1,12 +1,15 @@
 class BaseWell():
   """Base well class"""
+  wellname = ''
+  
   wellhead_X = 0
   wellhead_Y = 0
   wellhead_Z = 0
   
   Geometry = []
   
-  def __init__(self, arg_wellhead_X = 0, arg_wellhead_Y = 0, arg_wellhead_Z = 0 ):
+  def __init__(self, arg_wellname = '', arg_wellhead_X = 0, arg_wellhead_Y = 0, arg_wellhead_Z = 0 ):
+    self.wellname = arg_wellname
     self.wellhead_X = arg_wellhead_X
     self.wellhead_Y = arg_wellhead_Y
     self.wellhead_Z = arg_wellhead_Z
@@ -29,7 +32,7 @@ class WellField():
   def __init__(self):
     pass
   
-  def add_well(self, arg_well ):
+  def add_well( self, arg_well ):
     # append well to list
     self.Well_list.append( arg_well )
     # recalculate field size

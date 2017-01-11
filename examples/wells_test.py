@@ -6,10 +6,10 @@ class WellField_Test(TestCase):
     def test(self):
         WF = WellField()
 
-        WF.add_well( Well( 11, -7 ) )
-        WF.add_well( Well( -99, 88, 1 ) )
-        WF.add_well( Well( 1, 1 ) )
-        WF.add_well( Well( 100, 100, -2 ) )
+        WF.add_well( Well( 'well#1', 11, -7 ) )
+        WF.add_well( Well( 'well#2', -99, 88, 1 ) )
+        WF.add_well( Well( 'well#3', 1, 1 ) )
+        WF.add_well( Well( 'well#4', 100, 100, -2 ) )
 
         self.assertEqual( WF.topleft_X, -99)
         self.assertEqual( WF.topleft_Y, -7)
