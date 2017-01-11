@@ -1,3 +1,14 @@
+class WellGeometryStep():
+  """One step of clinometry data"""
+  inclination = 0 # in metres
+  tangent = 0     # in degrees
+  vertical = 0    # in degrees
+  
+  def __init__(self, arg_inclination, arg_tangent = 0, arg_vertical = 0 ): # no default value for arg_inclination
+    self.inclination = arg_inclination
+    self.tangent     = arg_tangent
+    self.vertical    = arg_vertical
+
 class BaseWell():
   """Base well class"""
   wellname = ''
@@ -6,13 +17,19 @@ class BaseWell():
   wellhead_Y = 0
   wellhead_Z = 0
   
-  Geometry = []
+  geometry = []
+  
+  well_length = 0
   
   def __init__(self, arg_wellname = '', arg_wellhead_X = 0, arg_wellhead_Y = 0, arg_wellhead_Z = 0 ):
     self.wellname = arg_wellname
     self.wellhead_X = arg_wellhead_X
     self.wellhead_Y = arg_wellhead_Y
     self.wellhead_Z = arg_wellhead_Z
+    
+  def add_geometry_step(self, arg_inclination, arg_tangent = 0, arg_vertical = 0 ): # no default value for arg_inclination
+    self.geometry.append( WellGeometryStep( arg_inclination, arg_tangent, arg_vertical ) )
+    self.well_length+=arg_inclination
    
 class Well(BaseWell):
   """Well class"""
