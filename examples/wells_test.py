@@ -29,6 +29,7 @@ class WellField_Test(TestCase):
       self.assertEqual( W.well_length, 32 )
       W.add_geometry_step( 12 )
       self.assertEqual( W.well_length, 44 )
+      self.assertEqual( W.geometry[-1].start_lenght, 32 )
     
 print("Test started")
 MT=WellField_Test()
