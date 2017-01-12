@@ -1,3 +1,5 @@
+from math import cos, radians
+
 class WellGeometryStep():
   """One step of clinometry data"""
   # consts from incliomerty
@@ -8,17 +10,26 @@ class WellGeometryStep():
   # calculable length 
   start_lenght = 0
   
-  # end point coordinates
+  # calculable end point coordinates
   end_X = 0
   end_Y = 0
   end_Z = 0
   
-  def __init__(self, arg_inclination, arg_tangent = 0, arg_vertical = 0, arg_start_lenght = 0 ): # no default value for arg_inclination
+  def __init__(self, arg_prev_step, arg_inclination, arg_tangent = 0, arg_vertical = 0, arg_start_lenght = 0 ): # no default value for arg_inclination
     self.inclination = arg_inclination
     self.tangent     = arg_tangent
     self.vertical    = arg_vertical
     
     self.start_lenght = arg_start_lenght
+    if not arg_prev_step is None:
+      self.end_X = arg_prev_step.end_X
+      self.end_Y = arg_prev_step.end_Y
+      self.end_Z = arg_prev_step.end_Z
+
+    # first primitive variant
+    self.end_X =+ arg_inclination * cos( radians( self.tangent ) )
+    self.end_Y =+ arg_inclination * cos( radians( self.tangent ) )
+    self.end_Z =+ arg_inclination * cos( radians( self.vertical ) )
 
 class BaseWell():
   """Base well class"""
@@ -39,7 +50,10 @@ class BaseWell():
     self.wellhead_Z = arg_wellhead_Z
     
   def add_geometry_step(self, arg_inclination, arg_tangent = 0, arg_vertical = 0 ): # no default value for arg_inclination    
-    self.geometry.append( WellGeometryStep( arg_inclination, arg_tangent, arg_vertical, self.well_length ) )
+    prev_step = None
+    if len( self.geometry ) > 0:
+      prev_step = self.geometry[-1]
+    self.geometry.append( WellGeometryStep( prev_step, arg_inclination, arg_tangent, arg_vertical, self.well_length ) )
     self.well_length+=arg_inclination
    
 class Well(BaseWell):

@@ -8,9 +8,10 @@ WF.add_well( Well( 'well#2', -99, 88, 1 ) )
 WF.add_well( Well( 'well#3', 1, 1 ) )
 
 w = Well( 'well#4', 100, 100, -2 )
-w.add_geometry_step( 15.8 )
-w.add_geometry_step( 11.7 )
-w.add_geometry_step( 7.8 )
+w.add_geometry_step( 10, 0 )
+w.add_geometry_step( 10, 45 )
+w.add_geometry_step( 10, 90 )
+w.add_geometry_step( 100, 0 )
 WF.add_well( w )
 
 print('\nprint out the list of wells')
