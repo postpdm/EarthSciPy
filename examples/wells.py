@@ -61,6 +61,8 @@ class Well(BaseWell):
   #def __init__(self):
   #  pass
 
+datums = [ 'Baltic', 'NAD27', 'NAD83', 'Ordnance Datum Newlyn', 'Normalhöhennull', 'ETRS1989', 'AOD', 'TUDKA-99' ]
+  
 class WellField():
   """Well field class"""
   Well_list = []
