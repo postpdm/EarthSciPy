@@ -1,4 +1,4 @@
-from math import cos, radians
+from math import cos, sin, radians
 
 class StaticDot3D: 
   """3D coordinates for dot"""
@@ -35,7 +35,7 @@ class WellGeometryStep():
     self.end_dot = StaticDot3D( arg_start_dot.X, arg_start_dot.Y, arg_start_dot.Z )
     
     self.end_dot.X += arg_inclination * cos( radians( self.tangent ) )
-    self.end_dot.Y += arg_inclination * cos( radians( self.tangent ) )
+    self.end_dot.Y += arg_inclination * sin( radians( self.tangent ) )
     self.end_dot.Z += arg_inclination * cos( radians( self.vertical ) )
 
 class BaseWell():
@@ -44,13 +44,13 @@ class BaseWell():
   
   wellhead = None # StaticDot3D
   
-  geometry = []
+  # geometry - list of WellGeometryStep
 
   well_length = 0
   
   def __init__(self, arg_wellname = '', arg_wellhead_X = 0, arg_wellhead_Y = 0, arg_wellhead_Z = 0 ):
-    self.wellname = arg_wellname
-    
+    self.geometry = []
+    self.wellname = arg_wellname    
     self.wellhead = StaticDot3D( arg_wellhead_X, arg_wellhead_Y, arg_wellhead_Z )
     
   def add_geometry_step(self, arg_inclination, arg_tangent = 0, arg_vertical = 0 ): # no default value for arg_inclination    
@@ -73,13 +73,15 @@ datums = [ 'Baltic', 'NAD27', 'NAD83', 'Ordnance Datum Newlyn', 'Normalhöhennul
   
 class WellField():
   """Well field class"""
-  Well_list = []
+  # Well_list - list of wells
+  field_name = ''
   
   topleft = StaticDot3D( 0, 0, 0 )
   bottomright = StaticDot3D( 0, 0, 0 )
   
-  def __init__(self):
-    pass
+  def __init__(self, arg_field_name):
+    self.Well_list = []
+    self.field_name = arg_field_name
   
   def add_well( self, arg_well ):
     # append well to list

@@ -4,7 +4,7 @@ from unittest import TestCase
 
 class WellField_Test(TestCase):
     def test_well_coordinates(self):
-      WF = WellField()
+      WF = WellField("_")
 
       WF.add_well( Well( 'well#1', 11, -7 ) )
       WF.add_well( Well( 'well#2', -99, 88, 1 ) )
