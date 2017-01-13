@@ -6,8 +6,9 @@ WF = WellField()
 WF.add_well( Well( 'well#1', 11, -7 ) )
 WF.add_well( Well( 'well#2', -99, 88, 1 ) )
 WF.add_well( Well( 'well#3', 1, 1 ) )
+WF.add_well( Well( 'well#4', 100, 100, -2 ) )
 
-w = Well( 'well#4', 100, 100, -2 )
+w = Well( 'well#5', 0, 0 )
 w.add_geometry_step( 10, 0 )
 w.add_geometry_step( 10, 45 )
 w.add_geometry_step( 10, 90 )
@@ -26,6 +27,6 @@ for s in w.geometry:
          ( s.inclination, s.tangent, s.vertical, s.start_lenght,
            s.end_dot.X, s.end_dot.Y, s.end_dot.Z ) )
 
-print ( 'field size top (X %d Y %d Z %d) bottom (X %d Y %d Z %d)' % ( WF.topleft.X, WF.topleft.Y, WF.topleft.Z, WF.bottomright.X, WF.bottomright.Y, WF.bottomright.Z ) )
+print ( '\nfield size top (X %d Y %d Z %d) bottom (X %d Y %d Z %d)' % ( WF.topleft.X, WF.topleft.Y, WF.topleft.Z, WF.bottomright.X, WF.bottomright.Y, WF.bottomright.Z ) )
 
 print("\nEnd")
