@@ -17,14 +17,14 @@ WF.add_well( w )
 print('\nprint out the list of wells')
 
 for i in WF.Well_list:
-  print ( 'wellhead %s X %+5d Y %+5d Z %+5d   well_length %d' % ( i.wellname, i.wellhead_X, i.wellhead_Y, i.wellhead_Z, i.well_length ) )
+  print ( 'wellhead %s X %+5d Y %+5d Z %+5d   well_length %d' % ( i.wellname, i.wellhead.X, i.wellhead.Y, i.wellhead.Z, i.well_length ) )
 
 print('\nprint out the geometry data for well', w.wellname )
 
 for s in w.geometry:
   print( 'Inclination %.1f tangent %.1f vertical %.1f. Start lenght %.1f. End point X Y Z (%.1f, %.1f, %.1f)' % 
          ( s.inclination, s.tangent, s.vertical, s.start_lenght,
-           s.end_X, s.end_Y, s.end_Z ) )
+           s.end_dot.X, s.end_dot.Y, s.end_dot.Z ) )
 
 print ( 'field size top (X %d Y %d Z %d) bottom (X %d Y %d Z %d)' % ( WF.topleft_X, WF.topleft_Y, WF.topleft_Z, WF.bottomright_X, WF.bottomright_Y, WF.bottomright_Z ) )
 

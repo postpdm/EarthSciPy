@@ -32,9 +32,21 @@ class WellField_Test(TestCase):
       self.assertEqual( W.geometry[-1].start_lenght, 32 )
     
     def test_well_inclination_circle(self):
-      W = Well( 'test well', 0, 0, 0 )
-      W.add_geometry_step( 10, 0, 0 )
-      self.assertEqual( W.geometry[-1].end_X, 10 )
+      W1 = Well( 'test well', 0, 0, 0 )
+      W1.add_geometry_step( 10, 0, 0 )
+      self.assertEqual( W1.well_length, 10 )
+      #self.assertEqual( W1.geometry[-1].end_X, 10 )
+      
+      # W1.add_geometry_step( 1, 0, 0 ) 
+
+      # какая-то фигня
+      # print( W1.geometry[-1].end_X, W1.geometry[-1].end_Y, W1.geometry[-1].end_Z )
+      # W1.add_geometry_step( 10, 0, 0 )
+      # print( W1.geometry[-1].end_X )
+      # W1.add_geometry_step( 10, 0, 0 )
+      # print( W1.geometry[-1].end_X )
+      # W1.add_geometry_step( 10, 0, 0 )
+      # print( W1.geometry[-1].end_X )
     
 print("Test started")
 MT=WellField_Test()
