@@ -26,6 +26,6 @@ for s in w.geometry:
          ( s.inclination, s.tangent, s.vertical, s.start_lenght,
            s.end_dot.X, s.end_dot.Y, s.end_dot.Z ) )
 
-print ( 'field size top (X %d Y %d Z %d) bottom (X %d Y %d Z %d)' % ( WF.topleft_X, WF.topleft_Y, WF.topleft_Z, WF.bottomright_X, WF.bottomright_Y, WF.bottomright_Z ) )
+print ( 'field size top (X %d Y %d Z %d) bottom (X %d Y %d Z %d)' % ( WF.topleft.X, WF.topleft.Y, WF.topleft.Z, WF.bottomright.X, WF.bottomright.Y, WF.bottomright.Z ) )
 
 print("\nEnd")

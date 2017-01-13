@@ -11,12 +11,12 @@ class WellField_Test(TestCase):
       WF.add_well( Well( 'well#3', 1, 1 ) )
       WF.add_well( Well( 'well#4', 100, 100, -2 ) )
 
-      self.assertEqual( WF.topleft_X, -99)
-      self.assertEqual( WF.topleft_Y, -7)
-      self.assertEqual( WF.topleft_Z, -2)
-      self.assertEqual( WF.bottomright_X, 100)
-      self.assertEqual( WF.bottomright_Y, 100)
-      self.assertEqual( WF.bottomright_Z, 1)
+      self.assertEqual( WF.topleft.X, -99)
+      self.assertEqual( WF.topleft.Y, -7)
+      self.assertEqual( WF.topleft.Z, -2)
+      self.assertEqual( WF.bottomright.X, 100)
+      self.assertEqual( WF.bottomright.Y, 100)
+      self.assertEqual( WF.bottomright.Z, 1)
     
     def test_well_inclination(self):
       W = Well( 'test well', 1, 1, 1 )
@@ -39,7 +39,7 @@ class WellField_Test(TestCase):
       
       # W1.add_geometry_step( 1, 0, 0 ) 
 
-      # какая-то фигня
+      # ??????????????
       # print( W1.geometry[-1].end_X, W1.geometry[-1].end_Y, W1.geometry[-1].end_Z )
       # W1.add_geometry_step( 10, 0, 0 )
       # print( W1.geometry[-1].end_X )

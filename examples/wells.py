@@ -74,12 +74,9 @@ datums = [ 'Baltic', 'NAD27', 'NAD83', 'Ordnance Datum Newlyn', 'Normalhöhennul
 class WellField():
   """Well field class"""
   Well_list = []
-  topleft_X = 0
-  topleft_Y = 0
-  topleft_Z = 0
-  bottomright_X = 0
-  bottomright_Y = 0
-  bottomright_Z = 0
+  
+  topleft = StaticDot3D( 0, 0, 0 )
+  bottomright = StaticDot3D( 0, 0, 0 )
   
   def __init__(self):
     pass
@@ -88,16 +85,16 @@ class WellField():
     # append well to list
     self.Well_list.append( arg_well )
     # recalculate field size
-    if self.topleft_X > arg_well.wellhead.X:
-      self.topleft_X = arg_well.wellhead.X
-    if self.topleft_Y > arg_well.wellhead.Y:
-      self.topleft_Y = arg_well.wellhead.Y
-    if self.topleft_Z > arg_well.wellhead.Z:
-      self.topleft_Z = arg_well.wellhead.Z
+    if self.topleft.X > arg_well.wellhead.X:
+      self.topleft.X = arg_well.wellhead.X
+    if self.topleft.Y > arg_well.wellhead.Y:
+      self.topleft.Y = arg_well.wellhead.Y
+    if self.topleft.Z > arg_well.wellhead.Z:
+      self.topleft.Z = arg_well.wellhead.Z
     
-    if self.bottomright_X < arg_well.wellhead.X:
-      self.bottomright_X = arg_well.wellhead.X
-    if self.bottomright_Y < arg_well.wellhead.Y:
-      self.bottomright_Y = arg_well.wellhead.Y
-    if self.bottomright_Z < arg_well.wellhead.Z:
-      self.bottomright_Z = arg_well.wellhead.Z
+    if self.bottomright.X < arg_well.wellhead.X:
+      self.bottomright.X = arg_well.wellhead.X
+    if self.bottomright.Y < arg_well.wellhead.Y:
+      self.bottomright.Y = arg_well.wellhead.Y
+    if self.bottomright.Z < arg_well.wellhead.Z:
+      self.bottomright.Z = arg_well.wellhead.Z
