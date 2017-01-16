@@ -18,6 +18,22 @@ class WellField_Test(TestCase):
       self.assertEqual( WF.bottomright.Y, 100)
       self.assertEqual( WF.bottomright.Z, 1)
     
+    def test_well_field_mutable(self):
+      # WellField contain mutable lists. Test it's not shared
+      WF_1 = WellField("1")
+      WF_2 = WellField("2")
+      WF_1.add_well( Well( 'well#1', 0, 0 ) )
+      self.assertEqual( len( WF_1.Well_list ), 1 ) # because we has add well to a first field
+      self.assertEqual( len( WF_2.Well_list ), 0 ) # because we hasn't add well to a second field
+    
+    def test_well_mutable(self):
+      # Well contain mutable lists. Test it's not shared
+      W_1 = Well("well#1", 0, 0 )
+      W_2 = Well("well#2", 0, 0)
+      W_1.add_geometry_step( 10 )
+      self.assertEqual( len( W_1.geometry ), 1 ) # because we has add inclinometry step to a first well
+      self.assertEqual( len( W_2.geometry ), 0 ) # because we hasn't add inclinometry step to a second well
+    
     def test_well_inclination(self):
       W = Well( 'test well', 1, 1, 1 )
       self.assertEqual( W.well_length, 0 )
@@ -51,6 +67,8 @@ class WellField_Test(TestCase):
 print("Test started")
 MT=WellField_Test()
 MT.test_well_coordinates()
+MT.test_well_field_mutable()
+MT.test_well_mutable()
 MT.test_well_inclination()
 MT.test_well_inclination_circle()
   

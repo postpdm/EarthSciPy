@@ -25,15 +25,16 @@ class WellGeometryStep():
   end_dot = None # type StaticDot3D
   
   def __init__(self, arg_start_dot, arg_inclination, arg_tangent = 0, arg_vertical = 0, arg_start_lenght = 0 ): # no default value for arg_inclination
+    # store inclination vector
     self.inclination = arg_inclination
     self.tangent     = arg_tangent
     self.vertical    = arg_vertical
-    
+    # store start lengtt
     self.start_lenght = arg_start_lenght
     
-    # first primitive variant
+    # calculate end dot coordinates
     self.end_dot = StaticDot3D( arg_start_dot.X, arg_start_dot.Y, arg_start_dot.Z )
-    
+    # first primitive variant    
     self.end_dot.X += arg_inclination * cos( radians( self.tangent ) )
     self.end_dot.Y += arg_inclination * sin( radians( self.tangent ) )
     self.end_dot.Z += arg_inclination * cos( radians( self.vertical ) )
@@ -61,7 +62,9 @@ class BaseWell():
     else:
       prev_dot = self.wellhead      
       
+    # add step
     self.geometry.append( WellGeometryStep( prev_dot, arg_inclination, arg_tangent, arg_vertical, self.well_length ) )
+    # inc the well length
     self.well_length+=arg_inclination
    
 class Well(BaseWell):
