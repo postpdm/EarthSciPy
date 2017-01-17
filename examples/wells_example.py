@@ -1,20 +1,19 @@
-from wells import *
+from earthscipy.wells import *
   
 print("Start")
 
 WF1 = WellField( "North" )
 WF1.add_well( Well( 'N_well#1', 11, -7 ) )
-#WF.add_well( Well( 'N_well#3', 1, 1 ) )
-#WF.add_well( Well( 'N_well#4', 100, 100, -2 ) )
-
+WF1.add_well( Well( 'N_well#3', 1, 1 ) )
+WF1.add_well( Well( 'N_well#4', 100, 100, -2 ) )
 w = Well( 'N_well#5', 0, 0 )
 w.add_geometry_step( 10, 0 )
-#w.add_geometry_step( 10, 45 )
-#w.add_geometry_step( 10, 90 )
-#w.add_geometry_step( 100, 0 )
+w.add_geometry_step( 10, 45 )
+w.add_geometry_step( 10, 90 )
+w.add_geometry_step( 100, 0 )
 WF1.add_well( w )
 
-WF1.add_well( Well( 'N_well#2', -99, 88, 1 ) )
+WF1.add_well( Well( 'N_well#6', -99, 88, 1 ) )
 
 w1 = Well( 'N_well#9', -100, -100 )
 w1.add_geometry_step( 1, 0 )
