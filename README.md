@@ -4,6 +4,24 @@
 
 Python library for [Earth science](https://en.wikipedia.org/wiki/Earth_science) (main in geology and petro science).
 
+## Requirements
+
+Python 3.3 or above.
+
 ## Testing
 
     python3 -m unittest tests/wells_tests.py
+
+## Usage example
+
+from earthscipy.wells import *
+  
+    WF = WellField( "North" )
+    w = Well( 'N_well#1', 0, 0 )
+    w.add_geometry_step( 10, 0 )
+    w.add_geometry_step( 10, 45 )
+    w.add_geometry_step( 10, 90 )
+    w.add_geometry_step( 100, 0 )
+    WF.add_well( w )
+
+See `examples\wells_example.py` for more.
