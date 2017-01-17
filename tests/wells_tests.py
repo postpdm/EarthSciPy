@@ -1,4 +1,4 @@
-from wells import *
+from earthscipy.wells import *
   
 from unittest import TestCase
 
@@ -63,13 +63,3 @@ class WellField_Test(TestCase):
       # print( W1.geometry[-1].end_X )
       # W1.add_geometry_step( 10, 0, 0 )
       # print( W1.geometry[-1].end_X )
-    
-print("Test started")
-MT=WellField_Test()
-MT.test_well_coordinates()
-MT.test_well_field_mutable()
-MT.test_well_mutable()
-MT.test_well_inclination()
-MT.test_well_inclination_circle()
-  
-print("Test ended")
