@@ -45,7 +45,7 @@ class WellField_Test(TestCase):
       self.assertEqual( W.well_length, 32 )
       W.add_geometry_step( 12 )
       self.assertEqual( W.well_length, 44 )
-      self.assertEqual( W.geometry[-1].start_lenght, 32 )
+      self.assertEqual( W.geometry[-1].start_length, 32 )
     
     def test_well_inclination_circle(self):
       W1 = Well( 'test well', 0, 0, 0 )

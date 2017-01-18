@@ -19,18 +19,18 @@ class WellGeometryStep():
   vertical = 0    # in degrees
   
   # calculable length 
-  start_lenght = 0
+  start_length = 0
   
   # calculable end point coordinates
   end_dot = None # type StaticDot3D
   
-  def __init__(self, arg_start_dot, arg_inclination, arg_tangent = 0, arg_vertical = 0, arg_start_lenght = 0 ): # no default value for arg_inclination
+  def __init__(self, arg_start_dot, arg_inclination, arg_tangent = 0, arg_vertical = 0, arg_start_length = 0 ): # no default value for arg_inclination
     # store inclination vector
     self.inclination = arg_inclination
     self.tangent     = arg_tangent
     self.vertical    = arg_vertical
-    # store start lengtt
-    self.start_lenght = arg_start_lenght
+    # store start length
+    self.start_length = arg_start_length
     
     # calculate end dot coordinates
     self.end_dot = StaticDot3D( arg_start_dot.X, arg_start_dot.Y, arg_start_dot.Z )
