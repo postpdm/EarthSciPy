@@ -3,6 +3,12 @@ from earthscipy.wells import *
 from unittest import TestCase
 
 class WellField_Test(TestCase):
+    def test_StaticDot3D(self):
+        s = StaticDot3D( 1, 2, 3 )
+        self.assertEqual( s.X, 1 )
+        self.assertEqual( s.Y, 2 )
+        self.assertEqual( s.Z, 3 )
+    
     def test_well_coordinates(self):
       WF = WellField("_")
 
