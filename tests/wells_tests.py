@@ -9,6 +9,10 @@ class WellField_Test(TestCase):
         self.assertEqual( s.Y, 2 )
         self.assertEqual( s.Z, 3 )
     
+    def test_WellGeometryStep( self ):    
+        WGS = WellGeometryStep( StaticDot3D( 0, 0, 0 ), 10 )
+        self.assertEqual( WGS.end_dot.X, 10 )
+    
     def test_well_coordinates(self):
       WF = WellField("_")
 
