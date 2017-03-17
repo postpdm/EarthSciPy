@@ -41,9 +41,9 @@ class WellGeometryStep():
     # calculate end dot coordinates
     self.end_dot = StaticDot3D( arg_start_dot.X, arg_start_dot.Y, arg_start_dot.Z )
     # first primitive variant    
-    self.end_dot.X += ( arg_inclination * Cos_Dg( self.tangent ) ) * Cos_Dg( self.vertical )
-    self.end_dot.Y += ( arg_inclination * Cos_Dg( self.tangent ) ) * Sin_Dg( self.vertical )
-    self.end_dot.Z += ( arg_inclination * Sin_Dg( self.tangent ) ) * Sin_Dg( self.vertical )
+    self.end_dot.X += arg_inclination * Cos_Dg( self.vertical )
+    self.end_dot.Y += self.end_dot.X * Cos_Dg( self.tangent )
+    self.end_dot.Z += self.end_dot.X * Sin_Dg( self.tangent )
 
 class BaseWell():
   """Base well class"""
