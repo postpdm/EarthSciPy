@@ -1,5 +1,11 @@
 from math import cos, sin, radians
 
+def Cos_Dg( A_Dg ):
+    return cos( radians( A_Dg ) )
+
+def Sin_Dg( A_Dg ):
+    return sin( radians( A_Dg ) )
+
 class StaticDot3D: 
   """3D coordinates for dot"""
   X = 0
@@ -35,9 +41,9 @@ class WellGeometryStep():
     # calculate end dot coordinates
     self.end_dot = StaticDot3D( arg_start_dot.X, arg_start_dot.Y, arg_start_dot.Z )
     # first primitive variant    
-    self.end_dot.X += arg_inclination * cos( radians( self.tangent ) )
-    self.end_dot.Y += arg_inclination * sin( radians( self.tangent ) )
-    self.end_dot.Z += arg_inclination * cos( radians( self.vertical ) )
+    self.end_dot.X += ( arg_inclination * Cos_Dg( self.tangent ) ) * Cos_Dg( self.vertical )
+    self.end_dot.Y += ( arg_inclination * Cos_Dg( self.tangent ) ) * Sin_Dg( self.vertical )
+    self.end_dot.Z += ( arg_inclination * Sin_Dg( self.tangent ) ) * Sin_Dg( self.vertical )
 
 class BaseWell():
   """Base well class"""
