@@ -2,6 +2,11 @@ from earthscipy.wells import *
   
 from unittest import TestCase
 
+from math import fabs
+
+# We do not much care about trigonometry precision. Underground measurements is not so accurate
+PERMISSIBLE_ERROR_VALUE = 0.000001
+
 class WellField_Test(TestCase):
     def test_StaticDot3D(self):
         s = StaticDot3D( 1, 2, 3 )
@@ -15,16 +20,48 @@ class WellField_Test(TestCase):
         
     def test_WellGeometryStepY_0( self ):
         WGS = WellGeometryStep( StaticDot3D( 0, 0, 0 ), 10 )
-        self.assertEqual( WGS.end_dot.Y, 10 )
+        self.assertEqual( WGS.end_dot.Y, 0 )
         
     def test_WellGeometryStepZ_0( self ):
         WGS = WellGeometryStep( StaticDot3D( 0, 0, 0 ), 10 )
         self.assertEqual( WGS.end_dot.Z, 0 )
+
+    def test_WellGeometryStepX_45( self ):
+        WGS = WellGeometryStep( StaticDot3D( 0, 0, 0 ), 10, 45 )
+        self.assertTrue( fabs( fabs( WGS.end_dot.X ) - 7.0710687 ) < PERMISSIBLE_ERROR_VALUE )
         
-    # def test_WellGeometryStepXYZ( self ):
-        # WGS = WellGeometryStep( StaticDot3D( 0, 0, 0 ), 50, 5, 45 )
-        # self.assertEqual( WGS.end_dot.X, 50 )
+    def test_WellGeometryStepY_45( self ):
+        WGS = WellGeometryStep( StaticDot3D( 0, 0, 0 ), 10, 45 )
+        self.assertTrue( fabs( fabs( WGS.end_dot.Y ) - 7.0710687 ) < PERMISSIBLE_ERROR_VALUE )
         
+    def test_WellGeometryStepZ_45( self ):
+        WGS = WellGeometryStep( StaticDot3D( 0, 0, 0 ), 10, 45 )
+        self.assertEqual( WGS.end_dot.Z, 0 )
+        
+    def test_WellGeometryStepX_90( self ):
+        WGS = WellGeometryStep( StaticDot3D( 0, 0, 0 ), 10, 90 )
+        self.assertTrue( fabs( WGS.end_dot.X ) < PERMISSIBLE_ERROR_VALUE )
+        
+    def test_WellGeometryStepY_90( self ):
+        WGS = WellGeometryStep( StaticDot3D( 0, 0, 0 ), 10, 90 )
+        self.assertEqual( WGS.end_dot.Y, 10 )
+        
+    def test_WellGeometryStepZ_90( self ):
+        WGS = WellGeometryStep( StaticDot3D( 0, 0, 0 ), 10, 90 )
+        self.assertEqual( WGS.end_dot.Z, 0 )
+        
+    def test_WellGeometryStepX_5_2( self ):
+        WGS = WellGeometryStep( StaticDot3D( 0, 0, 0 ), 10, 5, 2 )
+        self.assertTrue( fabs( fabs( WGS.end_dot.X ) - 9.955878 ) < PERMISSIBLE_ERROR_VALUE )
+    
+    def test_WellGeometryStepY_5_2( self ):
+        WGS = WellGeometryStep( StaticDot3D( 0, 0, 0 ), 10, 5, 2 )
+        self.assertTrue( fabs( fabs( WGS.end_dot.Y ) - 0.871026 ) < PERMISSIBLE_ERROR_VALUE )
+        
+    def test_WellGeometryStepZ_5_2( self ):
+        WGS = WellGeometryStep( StaticDot3D( 0, 0, 0 ), 10, 5, 2 )
+        self.assertTrue( fabs( fabs( WGS.end_dot.Z ) - 0.348994 ) < PERMISSIBLE_ERROR_VALUE )
+
     def test_well_coordinates(self):
       WF = WellField("_")
 
@@ -69,19 +106,25 @@ class WellField_Test(TestCase):
       self.assertEqual( W.well_length, 44 )
       self.assertEqual( W.geometry[-1].start_length, 32 )
     
-    def test_well_inclination_circle(self):
+    def test_well_inclination_circle_X(self):
+      # ths couldn't be in real life
       W1 = Well( 'test well', 0, 0, 0 )
       W1.add_geometry_step( 10, 0, 0 )
-      self.assertEqual( W1.well_length, 10 )
-      #self.assertEqual( W1.geometry[-1].end_X, 10 )
+      W1.add_geometry_step( 10, 90, 0 )
+      W1.add_geometry_step( 10, 180, 0 )
+      W1.add_geometry_step( 10, 270, 0 )
+     
+      self.assertEqual( W1.well_length, 40 )
+      self.assertTrue( fabs( W1.geometry[-1].end_dot.X ) < PERMISSIBLE_ERROR_VALUE )
       
-      # W1.add_geometry_step( 1, 0, 0 ) 
-
-      # ??????????????
-      # print( W1.geometry[-1].end_X, W1.geometry[-1].end_Y, W1.geometry[-1].end_Z )
-      # W1.add_geometry_step( 10, 0, 0 )
-      # print( W1.geometry[-1].end_X )
-      # W1.add_geometry_step( 10, 0, 0 )
-      # print( W1.geometry[-1].end_X )
-      # W1.add_geometry_step( 10, 0, 0 )
-      # print( W1.geometry[-1].end_X )
+    def test_well_inclination_circle_XY(self):
+      # ths couldn't be in real life
+      W1 = Well( 'test well', 0, 0, 0 )
+      W1.add_geometry_step( 10, 0, 0 )
+      W1.add_geometry_step( 10, 90, 0 )
+      W1.add_geometry_step( 10, 180, 0 )
+      W1.add_geometry_step( 10, 270, 0 )
+     
+      self.assertEqual( W1.well_length, 40 )
+      self.assertTrue( fabs( W1.geometry[-1].end_dot.X ) < PERMISSIBLE_ERROR_VALUE )
+      self.assertTrue( fabs( W1.geometry[-1].end_dot.Y ) < PERMISSIBLE_ERROR_VALUE )
