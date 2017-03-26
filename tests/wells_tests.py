@@ -115,7 +115,7 @@ class WellField_Test(TestCase):
       W1.add_geometry_step( 10, 270, 0 )
      
       self.assertEqual( W1.well_length, 40 )
-      self.assertTrue( fabs( W1.geometry[-1].end_dot.X ) < PERMISSIBLE_ERROR_VALUE )
+      self.assertTrue( fabs( W1.End_Dot().X ) < PERMISSIBLE_ERROR_VALUE )
       
     def test_well_inclination_circle_XY(self):
       # ths couldn't be in real life
@@ -126,5 +126,17 @@ class WellField_Test(TestCase):
       W1.add_geometry_step( 10, 270, 0 )
      
       self.assertEqual( W1.well_length, 40 )
-      self.assertTrue( fabs( W1.geometry[-1].end_dot.X ) < PERMISSIBLE_ERROR_VALUE )
-      self.assertTrue( fabs( W1.geometry[-1].end_dot.Y ) < PERMISSIBLE_ERROR_VALUE )
+      self.assertTrue( fabs( W1.End_Dot().X ) < PERMISSIBLE_ERROR_VALUE )
+      self.assertTrue( fabs( W1.End_Dot().Y ) < PERMISSIBLE_ERROR_VALUE )
+
+    def test_well_inclination_50steps(self):
+      W1 = Well( 'test well', 0, 0, 0 )
+      for i in range(0, 50):
+        W1.add_geometry_step( 10, 10, 0 )
+        W1.add_geometry_step( 10, -10, 0 )      
+      
+      self.assertEqual( W1.End_Dot().Y, 0 )
+      self.assertEqual( W1.End_Dot().Z, 0 )
+      self.assertTrue( W1.End_Dot().X < W1.well_length )
+      
+      self.assertEqual( W1.well_length, 1000 )
