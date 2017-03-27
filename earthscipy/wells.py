@@ -55,6 +55,8 @@ class BaseWell():
 
   well_length = 0
   
+  wellfield = None
+  
   def __init__(self, arg_wellname = '', arg_wellhead_X = 0, arg_wellhead_Y = 0, arg_wellhead_Z = 0 ):
     self.geometry = []
     self.wellname = arg_wellname    
@@ -94,10 +96,15 @@ class WellField():
     self.Well_list = []
     self.field_name = arg_field_name
   
+  def update_field_size( self, a_StaticDot3D ):
+    pass
+  
   def add_well( self, arg_well ):
     # append well to list
     self.Well_list.append( arg_well )
+    arg_well.wellfield = self
     # recalculate field size
+    self.update_field_size( arg_well.wellhead )
     if self.topleft.X > arg_well.wellhead.X:
       self.topleft.X = arg_well.wellhead.X
     if self.topleft.Y > arg_well.wellhead.Y:
