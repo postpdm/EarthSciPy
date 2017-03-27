@@ -97,24 +97,23 @@ class WellField():
     self.field_name = arg_field_name
   
   def update_field_size( self, a_StaticDot3D ):
-    pass
-  
+    if self.topleft.X > a_StaticDot3D.X:
+      self.topleft.X = a_StaticDot3D.X
+    if self.topleft.Y > a_StaticDot3D.Y:
+      self.topleft.Y = a_StaticDot3D.Y
+    if self.topleft.Z > a_StaticDot3D.Z:
+      self.topleft.Z = a_StaticDot3D.Z
+    
+    if self.bottomright.X < a_StaticDot3D.X:
+      self.bottomright.X = a_StaticDot3D.X
+    if self.bottomright.Y < a_StaticDot3D.Y:
+      self.bottomright.Y = a_StaticDot3D.Y
+    if self.bottomright.Z < a_StaticDot3D.Z:
+      self.bottomright.Z = a_StaticDot3D.Z
+
   def add_well( self, arg_well ):
     # append well to list
     self.Well_list.append( arg_well )
     arg_well.wellfield = self
     # recalculate field size
     self.update_field_size( arg_well.wellhead )
-    if self.topleft.X > arg_well.wellhead.X:
-      self.topleft.X = arg_well.wellhead.X
-    if self.topleft.Y > arg_well.wellhead.Y:
-      self.topleft.Y = arg_well.wellhead.Y
-    if self.topleft.Z > arg_well.wellhead.Z:
-      self.topleft.Z = arg_well.wellhead.Z
-    
-    if self.bottomright.X < arg_well.wellhead.X:
-      self.bottomright.X = arg_well.wellhead.X
-    if self.bottomright.Y < arg_well.wellhead.Y:
-      self.bottomright.Y = arg_well.wellhead.Y
-    if self.bottomright.Z < arg_well.wellhead.Z:
-      self.bottomright.Z = arg_well.wellhead.Z
