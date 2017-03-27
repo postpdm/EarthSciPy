@@ -60,7 +60,7 @@ class BaseWell():
     self.wellname = arg_wellname    
     self.wellhead = StaticDot3D( arg_wellhead_X, arg_wellhead_Y, arg_wellhead_Z )
     
-  def add_geometry_step(self, arg_inclination, arg_tangent = 0, arg_vertical = 0 ): # no default value for arg_inclination     
+  def add_geometry_step(self, arg_inclination, arg_vertical = 0, arg_tangent = 0 ): # no default value for arg_inclination     
     # add step
     self.geometry.append( WellGeometryStep( self.End_Dot(), arg_inclination, arg_vertical, arg_tangent, self.well_length ) )
     # inc the well length
