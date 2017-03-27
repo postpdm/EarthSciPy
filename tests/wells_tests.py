@@ -145,14 +145,24 @@ class WellField_Test(TestCase):
       
     def test_well_inclination_drill_small_cube(self):
       W1 = Well( 'test well 1', 0, 0, 0 )
-      W1.add_geometry_step( sqrt(3), 45, 35.5 )
+      W1.add_geometry_step( sqrt(3), 45, 35.5 ) #  it sould be a cube with 1m edges
             
       self.assertTrue( fabs( 1 - W1.End_Dot().X ) < PERMISSIBLE_VARIATION_VALUE_ROUGH )
       self.assertTrue( fabs( 1 - W1.End_Dot().Y ) < PERMISSIBLE_VARIATION_VALUE_ROUGH )
-      self.assertTrue( fabs( 1 - W1.End_Dot().Y ) < PERMISSIBLE_VARIATION_VALUE_ROUGH )      
+      self.assertTrue( fabs( 1 - W1.End_Dot().Z ) < PERMISSIBLE_VARIATION_VALUE_ROUGH )      
       
       self.assertEqual( sqrt( ( W1.End_Dot().X * W1.End_Dot().X ) + ( W1.End_Dot().Y * W1.End_Dot().Y ) + ( W1.End_Dot().Z * W1.End_Dot().Z ) ), sqrt(3) )
-     
+
+    def test_well_inclination_drill_small_cuboid(self):
+      W1 = Well( 'test well 1', 0, 0, 0 )
+      W1.add_geometry_step( sqrt(1+4+9), 56.309932474, 15.5013595669 ) #  it sould be a cuboid with 1-2-3m edges
+            
+      self.assertTrue( fabs( 2 - W1.End_Dot().X ) < PERMISSIBLE_VARIATION_VALUE_ROUGH )
+      self.assertTrue( fabs( 3 - W1.End_Dot().Y ) < PERMISSIBLE_VARIATION_VALUE_ROUGH )
+      self.assertTrue( fabs( 1 - W1.End_Dot().Z ) < PERMISSIBLE_VARIATION_VALUE_ROUGH )      
+      
+      self.assertTrue( fabs( sqrt( ( W1.End_Dot().X * W1.End_Dot().X ) + ( W1.End_Dot().Y * W1.End_Dot().Y ) + ( W1.End_Dot().Z * W1.End_Dot().Z ) ) - sqrt(1+4+9) ) < PERMISSIBLE_VARIATION_VALUE )
+      
     def test_well_inclination_drill_big_cube(self):
       W1 = Well( 'test well 1', 0, 0, 0 )
       W1.add_geometry_step( 1000, 17, 9 )
