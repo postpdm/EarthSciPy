@@ -132,11 +132,25 @@ class WellField_Test(TestCase):
     def test_well_inclination_50steps(self):
       W1 = Well( 'test well', 0, 0, 0 )
       for i in range(0, 50):
-        W1.add_geometry_step( 10, 10, 0 )
-        W1.add_geometry_step( 10, -10, 0 )      
+        W1.add_geometry_step( 10, 11, -7 )
+        W1.add_geometry_step( 10, -11, 7 )      
       
       self.assertEqual( W1.End_Dot().Y, 0 )
       self.assertEqual( W1.End_Dot().Z, 0 )
       self.assertTrue( W1.End_Dot().X < W1.well_length )
       
       self.assertEqual( W1.well_length, 1000 )
+      
+    def test_well_inclination_drill_big_cube(self):
+      W1 = Well( 'test well 1', 0, 0, 0 )
+      W1.add_geometry_step( 1000, 17, 9 )
+      
+      W2 = Well( 'test well 2', 0, 0, 0 )
+      for i in range(0, 100):
+        W2.add_geometry_step( 10, 17, 9 )      
+      
+      self.assertTrue( fabs( W1.End_Dot().X - W2.End_Dot().X ) < PERMISSIBLE_ERROR_VALUE )
+      self.assertTrue( fabs( W1.End_Dot().Y - W2.End_Dot().Y ) < PERMISSIBLE_ERROR_VALUE )
+      self.assertTrue( fabs( W1.End_Dot().Z - W2.End_Dot().Z ) < PERMISSIBLE_ERROR_VALUE )
+      
+      
